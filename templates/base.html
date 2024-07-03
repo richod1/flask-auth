@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flask Auth</title>
-    <link rel="stylesheet" href="{{url_for('static',filename='./styles.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">
 </head>
 <body>
     <nav>
         <ul>
             <li><a href="{{url_for('home')}}">Home</a> </li>
-            {% if current_user.is.authenticated%}
+            {% if current_user.is_authenticated%}
             <li><a href="{{url_for('account')}}">Account</a></li>
             <li><a href="{{url_for('logout')}}">Logout</a></li>
             {% else %}

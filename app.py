@@ -52,6 +52,33 @@ def register():
     return render_template('register')
     
 
+@app.route("/login",methods=['GET','POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+
+    if request.method=='POST':
+        email=request.form.get('email')
+        password=request.form.get('password')
+        user=User.query.filter_by(email=email).first()
+        if user and bcrypt.check_password_hash(user.password,password):
+            login_user(user,remember=True)
+            return redirect(url_for('home'))
+        else:
+            flash('Login Unsucceeful. Please check email annd password','danger')
+    return render_template('login.html')
+
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
+
+
+@app.route('/account')
+def account():
+    return render_template('account.html')
+
 
 
 
